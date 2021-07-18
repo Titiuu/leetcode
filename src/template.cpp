@@ -1,23 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <algorithm>
-#include <numeric>
-#include <regex>
-#include <cmath>
-#include <vector>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <string>
-#include <map>
-#include <unordered_map>
-#include <set>
-#include <unordered_set>
+#include "head.h"
 
-using namespace std;
-
-//#include <unordered_map> //插入和查找效率更高
 struct ListNode {
     int val;
     ListNode *next;
