@@ -94,3 +94,5 @@ dp[i]=dp[j] && check(s[j..i−1])
 对于某个位置，其能够存的水为min(leftMax, rightMax) - presentHeight。一般思路是维护两个数组保存左右最大值。
 对于这题可以利用双指针，减少空间复杂度。具体而言，在从左往右的过程中（反之同理）leftMax是完全可信的，而rightMax不可信。
 但是如果leftMax < presentRightMax，则min(leftMax, rightMax) = leftMax，而不需要考虑rightMax。
+217
+哈希表记一下结束
