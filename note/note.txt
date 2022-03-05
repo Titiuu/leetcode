@@ -88,3 +88,9 @@ dp[i]=dp[j] && check(s[j..i−1])
 其中check(s[j..i−1]) 表示子串s[j..i-1]是否出现在字典中。
 258
 模拟很容易做出来，但是官解的数学证明不容易想到
+521
+若其中一个较长则它本身就是特殊子序列
+42
+对于某个位置，其能够存的水为min(leftMax, rightMax) - presentHeight。一般思路是维护两个数组保存左右最大值。
+对于这题可以利用双指针，减少空间复杂度。具体而言，在从左往右的过程中（反之同理）leftMax是完全可信的，而rightMax不可信。
+但是如果leftMax < presentRightMax，则min(leftMax, rightMax) = leftMax，而不需要考虑rightMax。
