@@ -96,3 +96,5 @@ dp[i]=dp[j] && check(s[j..i−1])
 但是如果leftMax < presentRightMax，则min(leftMax, rightMax) = leftMax，而不需要考虑rightMax。
 217
 哈希表记一下结束
+2100
+预先记录一下每个位置的左边和右边的连续递减或递增的天数即可
