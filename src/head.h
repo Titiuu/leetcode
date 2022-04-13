@@ -14,4 +14,5 @@
 #include <unordered_map>
 #include <set>
 #include <unordered_set>  //插入和查找效率更高
+#include <random>
 using namespace std;
