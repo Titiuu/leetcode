@@ -21,20 +21,12 @@ public:
 class Solution2 {
 public:
     int countLatticePoints(vector<vector<int>>& circles) {
-        int left, right, down, up;
-        left = down = 999;
-        right = up = -999;
-        for (auto circle : circles) {
-            left = min(left, circle[0] - circle[2]);
-            right = max(right, circle[0] + circle[2]);
-            down = min(down, circle[1] - circle[2]);
-            up = max(up, circle[1] + circle[2]);
-        }
         int ans = 0;
-        for (int i = left; i <= right; i++) {
-            for (int j = down; j <= up; j++) {
-                for (auto pi : circles) {
-                    if ((pi[0] - i) * (pi[0] - i) + (pi[1] - j) * (pi[1] - j) <= pi[2] * pi[2]) {
+        for (int i = 0; i <= 200; i++) {
+            for (int j = 0; j <= 200; j++) {
+                for (auto &pi : circles) {
+                    int x = pi[0], y = pi[1], r = pi[2];
+                    if ((x - i) * (x - i) + (y - j) * (y - j) <= r * r) {
                         ans++; // 点在圆内
                         break;
                     }
@@ -42,6 +34,27 @@ public:
             }
         }
         return ans;
+    }
+};
+
+class Solution {
+public:
+    int countLatticePoints(vector<vector<int>>& circles) {
+        /* 遍历坐标系中的所有点，根据圆的方程过滤出落在圆上面的点 */
+        int result = 0;
+        for (int i = 0; i <= 200; i++) {
+            for (int j = 0; j <= 200; j++) {
+                for (auto& circle : circles) {
+                    int x = circle[0], y = circle[1], r = circle[2];
+                    /* 圆心为(a,b) 半径为r的圆的方程为(x-a)²+(x-b)²=r² */
+                    if ((i - x) * (i - x) + (j - y) * (j - y) <= r * r) {
+                        result++;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 };
 
