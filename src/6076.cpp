@@ -11,9 +11,9 @@ public:
         int res = 0;
         vector<int> t = stockPrices[0];
         for (int i = 1; i < n; i++) {
-            int x = t[0], y = t[1];
-            double k = double(stockPrices[i][1] - y) / double(stockPrices[i][0] - x);
-            while (i < n - 1 && double(stockPrices[i + 1][1] - y) / double(stockPrices[i + 1][0] - x)) {
+            long long x = t[0], y = t[1];
+            long long dy = stockPrices[i][1] - y, dx = stockPrices[i][0] - x;
+            while (i < n - 1 && dx * (stockPrices[i + 1][1] - y) == dy * (stockPrices[i + 1][0] - x)) {
                 i++;
             }
             res++;
