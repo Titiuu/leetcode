@@ -275,3 +275,7 @@ dx1:dx2 == dy1:dy2 ==> dx1*dy2 == dx2*dy1
 对所有矩形内的整数点进行编号，然后随机返回编号，并转换为整数点
 1936
 模拟即可
+1003
+对于连续的'abc'进行跳过处理，如果一次处理未改变当前状态则代表之后也不会改变则可以返回false，处理完返回true
+730
+不会，参考https://leetcode.cn/problems/count-different-palindromic-subsequences/solution/tong-ji-butong-by-jiang-hui-4-q5xf/
