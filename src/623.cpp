@@ -3,7 +3,7 @@
 class Solution {
 public:
     TreeNode* addOneRow(TreeNode* root, int val, int depth) {
-        if (depth == 1) {
+        if (depth == 1) {  //经典层序遍历
             return new TreeNode(val, root, nullptr);
         }
         vector<TreeNode *> curLevel(1, root);
