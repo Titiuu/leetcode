@@ -44,3 +44,47 @@ public:
         }
     }
 };
+
+class Solution1 {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        if (m == 0) {
+            nums1 = nums2;
+            return;
+        }
+        if (n == 0)
+            return;
+        int i = nums1.size() - 1, j = nums2.size() - 1, k = m - 1;
+        while (i >= 0) {
+            if (nums1[k] > nums2[j]) {
+                nums1[i] = nums1[k];
+                k--;
+                if (k < 0) {
+                    i--;
+                    while (i >= 0) {
+                        nums1[i] = nums2[j];
+                        i--;
+                        j--;
+                    }
+                    return;
+                }
+            }
+            else {
+                nums1[i] = nums2[j];
+                j--;
+                if (j < 0)
+                    return;
+            }
+            i--;
+        }
+    }
+};
+
+int main() {
+    Solution1 s;
+    vector<int> nums1 = {4,5,6,0,0,0}, nums2 = {1,2,3};
+    s.merge(nums1, 3, nums2, 3);
+    for (size_t i = 0; i < nums1.size(); i++) {
+        cout << nums1[i];
+    }
+}
