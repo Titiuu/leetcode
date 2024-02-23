@@ -27,3 +27,21 @@ public:
         return nums.size();
     }
 };
+
+class Solution1 {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        if (n < 3)
+            return n;
+        int i = 0, j = 1;
+        for (int k = 2; k < n; k++) {
+            if (nums[k] != nums[i] || nums[k] != nums[j]) {
+                nums[j + 1] = nums[k];
+                i++;
+                j++;
+            }
+        }
+        return j + 1;
+    }
+};
