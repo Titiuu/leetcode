@@ -13,3 +13,16 @@ public:
         return ans;
     }
 };
+
+class Solution1 {
+public:
+    int maxProfit(vector<int>& prices) {
+        int leftMin = 1e9, ans = 0;
+        int n = prices.size();
+        for (int i = 0; i < n; i++) {
+            leftMin = min(prices[i], leftMin);
+            ans = max(prices[i]-leftMin, ans);
+        }
+        return ans;
+    }
+};
