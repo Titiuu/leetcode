@@ -19,7 +19,7 @@ public:
         if (indices.find(val) == indices.end()) {
             return false;
         }
-        int index = indices[val];
+        int index = indices[val]; //将要删除的位置和最后一个元素交换
         int last = nums.back();
         nums[index] = last;
         indices[last] = index;

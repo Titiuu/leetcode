@@ -15,3 +15,18 @@ public:
         return jumpsNeed[n - 1];
     }
 };
+
+class Solution1 {
+public:
+    int jump(vector<int>& nums) {
+        vector<int> dp(nums.size(), 1e9);
+        dp[0] = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = 1; j <= nums[i]; j++) {
+                if (i + j < nums.size())
+                    dp[i + j] = min(dp[i] + 1, dp[i + j]);
+            }
+        }
+        return dp[nums.size() - 1];
+    }
+};

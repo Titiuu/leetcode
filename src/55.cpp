@@ -15,3 +15,16 @@ public:
         return canReach >= n - 1;
     }
 };
+
+class Solution1 {
+public:
+    bool canJump(vector<int>& nums) {
+        int maxDis = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (i <= maxDis) {
+                maxDis = max(maxDis, i + nums[i]);
+            }
+        }
+        return maxDis >= nums.size() - 1;
+    }
+};
