@@ -37,3 +37,10 @@ public:
         return -1;
     }
 };
+
+class Solution1 {
+public:
+    int strStr(string haystack, string needle) {
+        return haystack.find(needle);
+    }
+};

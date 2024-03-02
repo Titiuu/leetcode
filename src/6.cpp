@@ -27,8 +27,43 @@ public:
     }
 };
 
+class Solution1 {
+public:
+    string convert(string s, int numRows) {
+        vector<string> Rows(numRows, "");
+        int n = s.size();
+        int flag = 0;
+        for (int i = 0; i < n; i++) {
+            if (flag == 0) {
+                for (int j = 0; j < numRows; j++) {
+                    Rows[j] += s[i];
+                    i++;
+                    if (i == n)
+                        break;
+                }
+                flag = 1;
+                i--;
+            }
+            else {
+                for (int j = 0; j < numRows - 2; j++) {
+                    Rows[numRows - 2 - j] += s[i];
+                    i++;
+                    if (i == n)
+                        break;
+                }
+                flag = 0;
+                i--;
+            }
+        }
+        string ans = "";
+        for (auto& s : Rows)
+            ans += s;
+        return ans;
+    }
+};
+
 int main()
 {
-    Solution S;
+    Solution1 S;
     cout<<S.convert("PAYPALISHIRING",4);
 }
