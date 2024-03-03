@@ -41,6 +41,22 @@ public:
 class Solution1 {
 public:
     int strStr(string haystack, string needle) {
-        return haystack.find(needle);
+        int n = haystack.size(), m = needle.size();
+        //设置哨兵
+        haystack.insert(haystack.begin(), ' ');
+        needle.insert(needle.begin(), ' ');
+        //next数组
+        vector<int> next(m + 1, 0);
+        for (int i = 2, j = 0; i <= m; i++) {
+            while (j > 0 && needle[i] != needle[j + 1]) j = next[j];
+            if (needle[i] == needle[j + 1])  j++;
+            next[i] = j;
+        }
+        for (int i = 1, j = 0;i <= n;i++) {
+            while (j > 0 && haystack[i] != needle[j + 1]) j = next[j];
+            if (haystack[i] == needle[j + 1]) j++;
+            if (j == m) return i - m;
+        }
+        return -1;
     }
 };
