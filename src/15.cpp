@@ -71,10 +71,54 @@ public:
     }
 };
 
+class Solution1 {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        int pre = 1e6;
+        for (int k = 0; k < nums.size() - 2; k++) {
+            while (k < nums.size() - 2 && nums[k] == pre) k++;
+            if (k == nums.size() - 2) break;
+            int target = -1 * nums[k];
+            if (nums[k] + nums[k + 1] + nums[k + 2] > 0)
+                break;
+            int i = k + 1, j = nums.size() - 1;
+            while (i < j) {
+                int m = (i + j) / 2;
+                if (nums[i] + nums[m] > target) {
+                    j = m;
+                }
+                if (nums[m] + nums[j] < target) {
+                    i = m;
+                }
+                if (nums[i] + nums[j] > target) {
+                    j--;
+                }
+                if (nums[i] + nums[j] < target) {
+                    i++;
+                }
+                if (nums[i] + nums[j] == target) {
+                    if (i != j && i != k && j != k)
+                        res.push_back({ nums[k],nums[i],nums[j] });
+                    int left = nums[i], right = nums[j];
+                    while (i + 1 < nums.size() && nums[i + 1] == left) i++;
+                    while (j > 0 && nums[j - 1] == right) j--;
+                    if (i+1>=j-1) break;
+                    i = i + 1;
+                    j = j - 1;
+                }
+            }
+            pre = nums[k];
+        }
+        return res;
+    }
+};
+
 int main()
 {
-    Solution S;
-    vector<int> l = {3,0,-2,-1,1,2};
+    Solution1 S;
+    vector<int> l = {0,0,0,0};
     vector<vector<int>> a = S.threeSum(l);
     for(auto i:a)
     {
@@ -83,4 +127,5 @@ int main()
             cout<<j<<',';
         }
     }
+    return 0;
 }
