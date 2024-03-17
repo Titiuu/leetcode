@@ -80,3 +80,49 @@ public:
         return head;
     }
 };
+
+class Solution1 {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if (left == right || head->next == nullptr)
+            return head;
+        ListNode* p = head, * leftPre = nullptr, * rightNext = nullptr;
+        int count = 1;
+        vector<ListNode*> list;
+        while (p) {
+            if (count == left - 1)
+                leftPre = p;
+            else if (count >= left && count <= right) {
+                list.push_back(p);
+                if (count == right) {
+                    if (leftPre == nullptr) {
+                        rightNext = p->next;
+                        int i = right - left;
+                        head = list[i];
+                        leftPre = head;
+                        i--;
+                        while (i > -1) {
+                            leftPre->next = list[i];
+                            leftPre = leftPre->next;
+                            i--;
+                        }
+                        leftPre->next = rightNext;
+                    }
+                    else {
+                        rightNext = p->next;
+                        int i = right - left;
+                        while (i > -1) {
+                            leftPre->next = list[i];
+                            leftPre = leftPre->next;
+                            i--;
+                        }
+                        leftPre->next = rightNext;
+                    }
+                }
+            }
+            p = p->next;
+            count++;
+        }
+        return head;
+    }
+};
