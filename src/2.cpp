@@ -55,7 +55,7 @@ public:
     }
 };
 
-int main(){
+int main() {
     ListNode n1(2),n2(4),n3(3),n4(5),n5(6),n6(4);
     n1.next=&n2;
     n2.next=&n3;
