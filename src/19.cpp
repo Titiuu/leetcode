@@ -38,3 +38,20 @@ public: //快慢指针法，令第二个指针的慢n+1个位置，则当第一�
         return ans;
 }
 };
+
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(0), * fast = dummy, * slow = dummy;
+        dummy->next = head;
+        for (int i = 0; i < n; i++) {
+            fast = fast->next;
+        }
+        while (fast->next) {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        slow->next = slow->next->next;
+        return dummy->next;
+    }
+};
