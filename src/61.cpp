@@ -49,3 +49,33 @@ public:
         return head;
     }
 };
+
+class Solution1 {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if (head == nullptr || head->next == nullptr || k == 0)
+            return head;
+        ListNode* dummy = new ListNode(0), * p = dummy;
+        dummy->next = head;
+        ListNode* fast = dummy, * slow = dummy;
+        int n = 0;
+        while (p->next) {
+            n++;
+            p = p->next;
+        }
+        if (k % n == 0)
+            return dummy->next;
+        for (int i = 0; i < k % n; i++) {
+            fast = fast->next;
+        }
+        while (fast->next) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        ListNode* temp = dummy->next;
+        dummy->next = slow->next;
+        slow->next = fast->next;
+        fast->next = temp;
+        return dummy->next;
+    }
+};

@@ -54,3 +54,24 @@ public:
     }
 };
 
+class Solution1 {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* dummy = new ListNode(0), * pre = dummy, * p = head;
+        dummy->next = head;
+        while (p && p->next) {
+            if (p->val == p->next->val) { // 说明需要删除节点
+                int value = p->val;
+                while (p!=nullptr && p->val == value) {
+                    p = p->next;
+                }
+                pre->next = p;
+            }
+            else { // 不需要删除则说明为孤立节点，更新pre，并使得p指向下一个位置
+                pre = p;
+                p = p->next;
+            }
+        }
+        return dummy->next;
+    }
+};
