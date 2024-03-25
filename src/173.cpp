@@ -49,3 +49,30 @@ public:
         return (idx < arr.size());
     }
 };
+
+//**********************************************
+class BSTIterator {
+private:
+    void inOrder(TreeNode* root) {
+        if (root == nullptr)
+            return;
+        inOrder(root->left);
+        inorder.push_back(root->val);
+        inOrder(root->right);
+    }
+public:
+    vector<int> inorder;
+    int prt;
+    BSTIterator(TreeNode* root): prt(-1) {
+        inOrder(root);
+    }
+    
+    int next() {
+        prt++;
+        return inorder[prt];
+    }
+    
+    bool hasNext() {
+        return (prt < inorder.size() - 1);
+    }
+};
