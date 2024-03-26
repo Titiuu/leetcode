@@ -78,9 +78,51 @@ public:
     //     return res;
     // }
 };
+//******************************************************
+class Solution1 {
+private:
+    bool moreRight(string track, bool front) {
+        int l = 0, r = 0;
+        if (front)
+            track.pop_back();
+        for (auto& x : track) {
+            if (x == '(')
+                l++;
+            else
+                r++;
+        }
+        return r >= l;
+    }
+public:
+    vector<string> res;
+    int num;
+    vector<char> b;
+    void backtrack(int start, string& track) {
+        if (!track.empty() && track.back()==')' && moreRight(track, true)) {
+            return;
+        }
+        if (start == num * 2) {
+            if (moreRight(track, false))
+                res.emplace_back(track);
+            return;
+        }
+        for (int i = 0; i < 2; i++) {
+            track.push_back(b[i]); //做出选择
+            backtrack(start + 1, track); //回溯
+            track.pop_back(); //撤销选择
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        num = n;
+        b = { '(', ')' };
+        string s;
+        backtrack(0, s);
+        return res;
+    }
+};
 
-int main(){
-    Solution S;
+int main() {
+    Solution1 S;
     vector<string> box;
     box = S.generateParenthesis(2);
     for (auto i:box)

@@ -37,8 +37,34 @@ public:
     }
 };
 
+//*************************************************************************
+class Solution1 {
+public:
+    vector<vector<int>> res;
+    void backtrack(vector<int>& candidates, int start, vector<int>& track, int& target) {
+        if (target == 0) {
+            res.emplace_back(track);
+            return;
+        }
+        if (target < 0)
+            return;
+        for (int i = start; i < candidates.size(); i++) {
+            track.push_back(candidates[i]); //做出选择
+            target -= candidates[i];
+            backtrack(candidates, i, track, target); //回溯
+            track.pop_back(); //撤销选择
+            target += candidates[i];
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> track;
+        backtrack(candidates, 0, track, target);
+        return res;
+    }
+};
+
 int main() {
-    Solution S;
+    Solution1 S;
     vector<int> c = { 2,7,6,3,5,1 };
     S.combinationSum(c, 9);
 }

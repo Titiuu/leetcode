@@ -83,11 +83,35 @@ public:
     }
 };
 
+class Solution1 {
+public:
+    vector<vector<char>> letters { {'a','b','c'}, {'d','e','f'}, {'g','h','i'},{'j','k','l'},{'m','n','o'},{'p','q','r','s'},{'t','u','v'},{'w','x','y','z'} };
+    vector<string> res;
+    void backtrack(string digits, int start, string& track) {
+        if (start == digits.size()) {
+            res.emplace_back(track);
+            return;
+        }
+        for (int j = 0; j < letters[digits[start] - '2'].size(); j++) {
+            track.push_back(letters[digits[start] - '2'][j]); //做出选择
+            backtrack(digits, start + 1, track); //回溯
+            track.pop_back(); //撤销选择
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        if (digits == "")
+            return {};
+        string track;
+        backtrack(digits, 0, track);
+        return res;
+    }
+};
+
 int main()
 {
-    Solution S;
+    Solution1 S;
     vector<string> re;
-    re = S.letterCombinations("23");
+    re = S.letterCombinations("3");
     for(auto i:re){
         cout<<i<<"  ";
     }
