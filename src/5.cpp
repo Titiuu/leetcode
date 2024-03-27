@@ -76,10 +76,39 @@ public:
         return temp;
     }
 };
+//*********************************************************************
+class Solution2 {
+public:
+    string longestPalindrome(string s) {
+        int n = s.size();
+        if (n == 1)
+            return s;
+        string res(s.begin(), s.begin() + 1);
+        vector<vector<int>> dp(n, vector<int>(n, 0));
+        for (int i = 0; i < n - 1; i++) {
+            dp[i][i] = 1;
+            if (s[i] == s[i + 1]) {
+                dp[i][i + 1] = 1;
+                res = s.substr(i, 2);
+            }
+        }
+        dp[n - 1][n - 1] = 1;
+        for (int len = 3; len <= n; len++) {
+            for (int i = 0; i <= n - len; i++) {
+                if (dp[i + 1][i + len - 2] == 1 && s[i] == s[i + len - 1]) {
+                    dp[i][i + len - 1] = 1;
+                    if (res.size() < len)
+                        res = s.substr(i, len);
+                }
+            }
+        }
+        return res;
+    }
+};
 
 int main()
 {
-    Solution1 S;
+    Solution2 S;
     //cout<<S.longestPalindrome("miycvxmqggnmmcwlmizfojwrurwhwygwfykyefxbgveixykdebenzitqnciigfjgrzzbtgeazyrbiirmejhdwcgjzwqolrturjlqpsgunuqerqjevbheblmbvgxyedxshswsokbhzapfuojgyfhctlaifrisgzqlczageirnukgnmnbwogknyyuynwsuwbumdmoqwxprykmazghcpmkdcjduepjmjdxrhvixxbfvhybjdpvwjbarmbqypsylgtzyuiqkexgvirzylydrhrmuwpmfkvqllqvekyojoacvyrzjevaupypfrdguhukzuqojolvycgpjaendfetkgtojepelhcltorueawwjpltehbbjrvznxhahtuaeuairvuklctuhcyzomwrrznrcqmovanxmiyilefybkbveesrxkmqrqkowyrimuejqtikcjfhizsmumajbqglxrvevexnleflocxoqgoyrzgqflwiknntdcykuvdcpzlakljidclhkllftxpinpvbngtexngdtntunzgahuvfnqjedcafzouopiixw");
-    cout<<S.longestPalindrome("acaacb");
+    cout<<S.longestPalindrome("aaaaa");
 }

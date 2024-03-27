@@ -5,7 +5,7 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
         int res = 1; // 至少为1
-        vector<int> dp(n, 1); //dp[i+1] = dp[i] + 1 if(nums[i+1]>nums[i]) else dp[i+1] = 1 (do nothing)
+        vector<int> dp(n, 1); //dp[i+1] = dp[j] + 1 if(nums[i+1]>nums[j]) else dp[i+1] = 1 (do nothing)
         for (int i = 1; i < n; i++) {
             int len = 1;
             for (int j = 0; j < i; j++) {
