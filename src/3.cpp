@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <iostream>
-#include <vector>
-#include <string>
-
-using namespace std;
-
+#include "head.h"
 
 class Solution {
 public:
@@ -33,9 +27,31 @@ public:
     }
 };
 
+class Solution1 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if (s.size() <= 1)
+            return s.size();
+        int left = 0, right = 1, res = 0;
+        while (right <= s.size()) {
+            string subs = s.substr(left, right - left);
+            auto set = unordered_set<char> {};
+            for (auto& c : subs)
+                set.insert(c);
+            if (right - left == set.size()) {
+                res = max(res, right - left);
+                right++;
+            }
+            else
+                left++;
+        }
+        return res;
+    }
+};
+
 int main()
 {
-    Solution S;
+    Solution1 S;
     string s="aab";
     cout<<S.lengthOfLongestSubstring(s);
 }
