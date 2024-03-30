@@ -49,6 +49,28 @@ public:
     }
 };
 
+class Solution1 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if (s.size() <= 1)
+            return s.size();
+        int left = 0, right = 1, res = 0;
+        string subs = s.substr(left, right - left);
+        auto set = unordered_set<char> {s[0]};
+        while (right < s.size()) {
+            while (right < s.size() && set.count(s[right]) == 0) {
+                set.insert(s[right]);
+                right++;
+            }
+            res = max(res, right - left);
+            set.erase(s[left]);
+            left++;
+        }
+        return res;
+    }
+};
+
+
 int main()
 {
     Solution1 S;
