@@ -29,6 +29,35 @@ public:
     }
 };
 
+class Solution {
+public:
+    void dfs(vector<vector<char>>& grid, vector<vector<int>>& visited, int p, int q) { // (p,q)代表初始位置
+        if (p < 0 || q < 0 || p >= grid.size() || q >= grid[0].size())
+            return;
+        if (visited[p][q])
+            return;
+        visited[p][q] = 1;
+        dfs(grid, visited, p + 1, q);
+        dfs(grid, visited, p - 1, q);
+        dfs(grid, visited, p, q + 1);
+        dfs(grid, visited, p, q - 1);
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        vector<vector<int>> visited(m, vector<int>(n, 0)); // 0 means not visited
+        int res = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (visited[i][j] == 0 && grid[i][j] == '1') { // 未浏览到
+                    dfs(grid, visited, i, j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+};
+
 int main() {
     vector<vector<char>> grid { {'1','1','1'}, {'0','1','0'}, {'1','1','1'} };
     Solution s;
