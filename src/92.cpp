@@ -126,3 +126,25 @@ public:
         return head;
     }
 };
+
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if (left == right || head->next == nullptr)
+            return head;
+        ListNode* dummy = new ListNode(), * p = dummy, * leftPre = nullptr, * curr = nullptr, * next = nullptr;
+        dummy->next = head;
+        for (int i = 0; i < left - 1; i++) {
+            p = p->next;
+        }
+        leftPre = p;
+        curr = p->next;
+        for (int i = 0; i < right - left; i++) {
+            next = curr->next;
+            curr->next = next->next;
+            next->next = leftPre->next;
+            leftPre->next = next;
+        }
+        return dummy->next;
+    }
+};

@@ -57,8 +57,63 @@ public:
     }
 };
 
+class Solution1 {
+public:
+    int up, left, down, right; // 边界
+    vector<int> res;
+    void walk(vector<vector<int>>& matrix, int& p, int& q, int direction) {
+        if (direction == 0) {
+            while (q != right) {
+                res.push_back(matrix[p][q]);
+                q++;
+            }
+            up++;
+        }
+        else if (direction == 1) {
+            while (p != down) {
+                res.push_back(matrix[p][q]);
+                p++;
+            }
+            right--;
+        }
+        else if (direction == 2) {
+            while (q != left) {
+                res.push_back(matrix[p][q]);
+                q--;
+            }
+            down--;
+        }
+        else if (direction == 3) {
+            while (p != up) {
+                res.push_back(matrix[p][q]);
+                p--;
+            }
+            left++;
+        }
+        else {
+            cout << "invalid direction!" << endl;
+        }
+    }
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int m = matrix.size(), n = matrix[0].size();
+        up = 0, left = 0, down = m - 1, right = n - 1; // 边界
+        int direction = 0; // 方向
+        int p = 0, q = 0; // 起始位置
+        int len = -1;
+        while (1) {
+            walk(matrix, p, q, direction);
+            direction = (direction + 1) % 4;
+            if (len == res.size())
+                break;
+            len = res.size();
+        }
+        res.push_back(matrix[p][q]);
+        return res;
+    }
+};
+
 int main() {
-    Solution S;//{{1,2,3},{4,5,6},{7,8,9}}
+    Solution1 S;//{{1,2,3},{4,5,6},{7,8,9}}
     vector<vector<int>> mat = {{1,2,3},{4,5,6},{7,8,9}};//{{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}}
     vector<int> res = S.spiralOrder(mat);
     for (auto i:res)
