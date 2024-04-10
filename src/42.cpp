@@ -48,8 +48,31 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    int trap(vector<int>& height) {
+        int ans = 0;
+        int left = 0, right = height.size() - 1;  //双指针
+        int leftMax = 0, rightMax = 0;  //当前左右侧的最高值
+        while (left <= right) {
+            if (leftMax < rightMax) { // 左侧最高小于右侧最高
+                ans += max(0, leftMax - height[left]);
+                leftMax = max(leftMax, height[left]);
+                left++;
+            }
+            else {
+                ans += max(0, rightMax - height[right]);
+                rightMax = max(rightMax, height[right]);
+                right--;
+            }
+        }
+        return ans;
+    }
+};
+
+
 int main() {
-    Solution1 s;
+    Solution2 s;
     vector<int> height = { 0,1,0,2,1,0,1,3,2,1,2,1 };
     cout << s.trap(height);
 }
