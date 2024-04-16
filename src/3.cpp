@@ -27,7 +27,7 @@ public:
     }
 };
 
-class Solution1 {
+class Solution6 {
 public:
     int lengthOfLongestSubstring(string s) {
         if (s.size() <= 1)
@@ -70,10 +70,30 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if (s.size() <= 1)
+            return s.size();
+        int left = 0, right = 0, res = 0;
+        unordered_map<char,int> mp;
+        while (right < s.size()) {
+            mp[s[right]]++;
+            right++;
+            while(mp[s[right-1]] > 1){
+                mp[s[left]]--;
+                left++;
+            }
+            res = max(res, right - left);
+        }
+        return res;
+    }
+};
+
 
 int main()
 {
-    Solution1 S;
+    Solution2 S;
     string s="aab";
     cout<<S.lengthOfLongestSubstring(s);
 }
